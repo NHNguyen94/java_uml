@@ -28,8 +28,8 @@ public class TestFileLoading {
             person.setAge(Integer.parseInt(parts[2].trim()));
             person.setHeight(Integer.parseInt(parts[3].trim()));
             person.setWeight(Integer.parseInt(parts[4].trim()));
-            System.out.println("person: " + person);
-//            persons.add(person);
+//            System.out.println("person: " + person);
+            persons.add(person);
         }
         System.out.println(persons.size());
     }
