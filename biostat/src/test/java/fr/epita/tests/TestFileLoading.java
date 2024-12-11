@@ -5,10 +5,8 @@ import fr.epita.biostat.datamodel.Person;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.OptionalDouble;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TestFileLoading {
     public static void main(String[] args) throws IOException {
@@ -44,12 +42,39 @@ public class TestFileLoading {
         System.out.println("avg age: " + average);
 
         // Stream is to split all the person in persons and perform computation parallell
-        OptionalDouble avg = persons.stream()
+        OptionalDouble avgAge = persons.stream()
 //                .mapToInt(p -> p.getAge())
                 .mapToInt(Person::getAge)
                 .average();
-        if (avg.isPresent()) {
-            System.out.println("avg Age: " + avg.getAsDouble());
+        if (avgAge.isPresent()) {
+            System.out.println("avg Age: " + avgAge.getAsDouble());
         }
+
+        OptionalInt maxHeight = persons.stream()
+//                .mapToInt(p -> p.getAge())
+                .mapToInt(Person::getAge)
+                .max();
+
+        if (maxHeight.isPresent()) {
+            System.out.println("max Height: " + maxHeight.getAsInt());
+        }
+
+        OptionalInt minWeight = persons.stream().mapToInt(p -> p.getWeight()).min();
+
+        if (minWeight.isPresent()) {
+            System.out.println("min Weight: " + minWeight.getAsInt());
+        }
+
+        Map<Integer, List<Person>> personsByAge = persons
+                .stream()
+                .collect(Collectors.groupingBy(p -> p.getAge()));
+
+        System.out.println("personsByAge: " + personsByAge);
+
+        Map<String, List<Person>> personsByGender = persons
+                .stream()
+                .collect(Collectors.groupingBy(p -> p.getGender()));
+
+        System.out.println("personByGender: " + personsByGender);
     }
 }
