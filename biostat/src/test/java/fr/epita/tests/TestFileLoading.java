@@ -76,5 +76,11 @@ public class TestFileLoading {
                 .collect(Collectors.groupingBy(p -> p.getGender()));
 
         System.out.println("personByGender: " + personsByGender);
+
+        Map<String, Long> countsByGender = persons
+                .stream()
+                .collect(Collectors.groupingBy(Person::getGender, Collectors.counting()));
+
+        System.out.println("counts by Gender: " + countsByGender);
     }
 }
