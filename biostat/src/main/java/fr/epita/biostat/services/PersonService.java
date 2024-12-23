@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PersonCSVService {
+public class PersonService {
 
     private final List<String> ACCEPTED_ATTRIBUTE_TYPE = List.of(new String[]{"Height", "Weight", "Age"});
     private final List<String> ACCEPTED_COMPUTE_TYPE = List.of(new String[]{"Average", "Max", "Min"});
@@ -137,7 +137,7 @@ public class PersonCSVService {
     public Long computeCount(List<Person> persons, String type) {
         checkAttributeType(type);
         if (Objects.equals(type, "Height")) {
-            return computeCountHeigh(persons);
+            return computeCountHeight(persons);
         } else if (Objects.equals(type, "Age")) {
             return computeCountAge(persons);
         } else if (Objects.equals(type, "Weight")) {
@@ -152,7 +152,7 @@ public class PersonCSVService {
                 .count();
     }
 
-    private Long computeCountHeigh(List<Person> persons) {
+    private Long computeCountHeight(List<Person> persons) {
         return persons.stream()
                 .mapToInt(Person::getHeight)
                 .count();
@@ -164,7 +164,7 @@ public class PersonCSVService {
                 .count();
     }
 
-    public Map<Integer, List<Person>> computeGroupByHeigh(List<Person> persons) {
+    public Map<Integer, List<Person>> computeGroupByHeight(List<Person> persons) {
         return persons.stream().collect(Collectors.groupingBy(Person::getHeight));
     }
 
@@ -180,7 +180,7 @@ public class PersonCSVService {
         return persons.stream().collect(Collectors.groupingBy(Person::getAge));
     }
 
-    public Map<Integer, Long> computeGroupCountByHeigh(List<Person> persons) {
+    public Map<Integer, Long> computeGroupCountByHeight(List<Person> persons) {
         return persons.stream().collect(Collectors.groupingBy(Person::getHeight, Collectors.counting()));
     }
 
@@ -194,5 +194,16 @@ public class PersonCSVService {
 
     public Map<Integer, Long> computeGroupCountByAge(List<Person> persons) {
         return persons.stream().collect(Collectors.groupingBy(Person::getAge, Collectors.counting()));
+    }
+
+    public Map<Integer, Double> computeDistAgeByWeight(List<Person> persons) {
+        return persons.stream()
+                .collect(Collectors.groupingBy(
+                        Person::getAge,
+                        Collectors.collectingAndThen(
+                                Collectors.averagingInt(Person::getWeight),
+                                Double::valueOf
+                        )
+                ));
     }
 }

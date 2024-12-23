@@ -1,17 +1,14 @@
 package fr.epita.tests;
 
 import fr.epita.biostat.datamodel.Person;
-import fr.epita.biostat.services.PersonCSVService;
+import fr.epita.biostat.services.PersonService;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TestFileLoading {
     public static void main(String[] args) throws IOException {
-        PersonCSVService personService = new PersonCSVService();
+        PersonService personService = new PersonService();
         List<Person> persons = personService.readPersons();
         System.out.println("total people: " + persons.size());
 
@@ -38,5 +35,8 @@ public class TestFileLoading {
 
         Map<String, Long> countsByGender = personService.computeGroupByCountGender(persons);
         System.out.println("counts by Gender: " + countsByGender);
+
+        Map<Integer, Double> distAgeByHeight = personService.computeDistAgeByWeight(persons);
+        System.out.println("Age x Height: " + distAgeByHeight);
     }
 }
