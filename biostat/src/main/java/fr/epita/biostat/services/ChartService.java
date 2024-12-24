@@ -1,7 +1,6 @@
 package fr.epita.biostat.services;
 
 import org.knowm.xchart.*;
-import org.knowm.xchart.style.Styler;
 
 import java.util.*;
 
@@ -46,9 +45,6 @@ public class ChartService {
                 .yAxisTitle(yTitle)
                 .build();
         chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
-        chart.getStyler().setChartTitleVisible(false);
-        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideSW);
-        chart.getStyler().setMarkerSize(16);
         List<Integer> labelInput = new ArrayList<>(data.keySet());
         List<Double> valueInput = new ArrayList<>(data.values());
         chart.addSeries(seriesName, labelInput, valueInput);

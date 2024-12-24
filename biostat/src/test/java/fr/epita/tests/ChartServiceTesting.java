@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class ChartTesting {
+public class ChartServiceTesting {
 
     public static void main(String[] args) throws IOException {
         PersonService personService = new PersonService();
@@ -24,13 +24,22 @@ public class ChartTesting {
                 "Counts by Gender"
         );
 
-        Map<Integer, Double> distAgeByHeight = personService.computeDistAgeByWeight(persons);
+        Map<Integer, Double> mapAgeByHeight = personService.computeMapAgeByWeight(persons);
         chartService.drawScatterChart(
-                distAgeByHeight,
-                "Distribution of Age and Weight",
+                mapAgeByHeight,
+                "Relationship of Age and Weight",
                 "Age",
-                "Height",
+                "Weight",
                 "Age x Weight"
+        );
+
+        Map<Integer, Double> mapHeightByWeight = personService.computeMapHeightByWeight(persons);
+        chartService.drawScatterChart(
+                mapHeightByWeight,
+                "Relationship of Height and Weight",
+                "Height",
+                "Weight",
+                "Height x Weight"
         );
     }
 }

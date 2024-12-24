@@ -6,7 +6,7 @@ import fr.epita.biostat.services.PersonService;
 import java.io.IOException;
 import java.util.*;
 
-public class TestFileLoading {
+public class PersonServiceTesting {
     public static void main(String[] args) throws IOException {
         PersonService personService = new PersonService();
         List<Person> persons = personService.readPersons();
@@ -35,8 +35,5 @@ public class TestFileLoading {
 
         Map<String, Long> countsByGender = personService.computeGroupByCountGender(persons);
         System.out.println("counts by Gender: " + countsByGender);
-
-        Map<Integer, Double> distAgeByHeight = personService.computeDistAgeByWeight(persons);
-        System.out.println("Age x Height: " + distAgeByHeight);
     }
 }

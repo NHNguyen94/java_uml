@@ -56,7 +56,7 @@ public class PersonService {
     }
 
     private OptionalDouble computeAvgAge(List<Person> persons) {
-        // Stream is to split all the person in persons and perform computation parallell
+        // Stream is to split all the person in persons and perform computation parallel
         return persons.stream()
                 .mapToInt(Person::getAge)
                 .average();
@@ -196,10 +196,21 @@ public class PersonService {
         return persons.stream().collect(Collectors.groupingBy(Person::getAge, Collectors.counting()));
     }
 
-    public Map<Integer, Double> computeDistAgeByWeight(List<Person> persons) {
+    public Map<Integer, Double> computeMapAgeByWeight(List<Person> persons) {
         return persons.stream()
                 .collect(Collectors.groupingBy(
                         Person::getAge,
+                        Collectors.collectingAndThen(
+                                Collectors.averagingInt(Person::getWeight),
+                                Double::valueOf
+                        )
+                ));
+    }
+
+    public Map<Integer, Double> computeMapHeightByWeight(List<Person> persons) {
+        return persons.stream()
+                .collect(Collectors.groupingBy(
+                        Person::getHeight,
                         Collectors.collectingAndThen(
                                 Collectors.averagingInt(Person::getWeight),
                                 Double::valueOf
