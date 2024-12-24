@@ -217,4 +217,10 @@ public class PersonService {
                         )
                 ));
     }
+
+    public Map<String, Long> computeGroupByCountAgeGroup(List<Person> persons) {
+        return persons
+                .stream()
+                .collect(Collectors.groupingBy(Person::getAgeGroup, Collectors.counting()));
+    }
 }

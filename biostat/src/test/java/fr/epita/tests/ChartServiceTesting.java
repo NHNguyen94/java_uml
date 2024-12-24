@@ -24,14 +24,14 @@ public class ChartServiceTesting {
                 "Counts by Gender"
         );
 
-        Map<Integer, Double> mapAgeByHeight = personService.computeMapAgeByWeight(persons);
-        chartService.drawScatterChart(
-                mapAgeByHeight,
-                "Relationship of Age and Weight",
-                "Age",
-                "Weight",
-                "Age x Weight"
-        );
+//        Map<Integer, Double> mapAgeByHeight = personService.computeMapAgeByWeight(persons);
+//        chartService.drawScatterChart(
+//                mapAgeByHeight,
+//                "Relationship of Age and Weight",
+//                "Age",
+//                "Weight",
+//                "Age x Weight"
+//        );
 
         Map<Integer, Double> mapHeightByWeight = personService.computeMapHeightByWeight(persons);
         chartService.drawScatterChart(
@@ -41,5 +41,8 @@ public class ChartServiceTesting {
                 "Weight",
                 "Height x Weight"
         );
+
+        Map<String, Long> countsByAgeGroup = personService.computeGroupByCountAgeGroup(persons);
+        chartService.drawPieChart(countsByAgeGroup, "Counts by Age groups");
     }
 }

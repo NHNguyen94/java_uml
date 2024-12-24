@@ -50,4 +50,15 @@ public class ChartService {
         chart.addSeries(seriesName, labelInput, valueInput);
         new SwingWrapper<>(chart).displayChart();
     }
+
+    public void drawPieChart(Map<String, Long> data,
+                             String chartTitle) {
+        PieChart chart = new PieChartBuilder()
+                .width(chartWidth)
+                .height(chartHeight)
+                .title(chartTitle)
+                .build();
+        data.forEach((key, value) -> chart.addSeries(key, value));
+        new SwingWrapper<>(chart).displayChart();
+    }
 }

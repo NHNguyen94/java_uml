@@ -35,5 +35,8 @@ public class PersonServiceTesting {
 
         Map<String, Long> countsByGender = personService.computeGroupByCountGender(persons);
         System.out.println("counts by Gender: " + countsByGender);
+
+        Map<String, Long> countsByAgeGroup = personService.computeGroupByCountAgeGroup(persons);
+        System.out.println("counts by Age Group: " + countsByAgeGroup);
     }
 }

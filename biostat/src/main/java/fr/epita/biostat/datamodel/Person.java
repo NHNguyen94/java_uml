@@ -26,6 +26,18 @@ public class Person {
         return age;
     }
 
+    public String getAgeGroup() {
+        if (age <= 30) {
+            return "age <= 30";
+        } else if (age <= 40) {
+            return "30 < age <= 40";
+        } else if (age <= 50) {
+            return "40 < age <= 50";
+        } else {
+            return "age > 50";
+        }
+    }
+
     public void setAge(Integer age) {
         this.age = age;
     }
