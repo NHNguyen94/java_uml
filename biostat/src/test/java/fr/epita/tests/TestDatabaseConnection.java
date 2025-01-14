@@ -24,11 +24,23 @@ public class TestDatabaseConnection {
         PreparedStatement insertStatement = conection.prepareStatement(sqlInsert);
         insertStatement.execute();
 
-        String sqlSelect = "SELECT * FROM TEST_PERSONS";
+        String sqlParamInsert =
+                "INSERT INTO TEST_PERSONS(name, gender, age, height, weight) " +
+                        "VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement insertParanStatement = conection.prepareStatement(sqlParamInsert);
+        insertParanStatement.setString(1, "test_2");
+        insertParanStatement.setString(2, "F");
+        insertParanStatement.setInt(3, 18);
+        insertParanStatement.setInt(4, 170);
+        insertParanStatement.setInt(5, 50);
+
+        insertParanStatement.execute();
+
+        String sqlSelect = "SELECT count(*) as count_row FROM TEST_PERSONS";
         PreparedStatement selectStatement = conection.prepareStatement(sqlSelect);
         ResultSet resultSet = selectStatement.executeQuery();// the reason it returns cursor is that there are GBs of data; it might crash the program
         while (resultSet.next()) {
-            System.out.println(resultSet.getString("name"));
+            System.out.println(resultSet.getString("count_row"));
         }
         conection.close(); // Need to close the connection to manage resources, the connection might get expired or exceed max limit of connection
     }
